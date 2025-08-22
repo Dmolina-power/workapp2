@@ -1,134 +1,196 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import {
-  emailSignInStart,
-  googleSignInStart,
-} from "../../redux/User/user.actions";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { emailSignInStart, googleSignInStart } from '../../redux/User/user.actions';
 
-import { Button, ButtonGroup } from "@chakra-ui/react";
-
+// Chakra UI Component Imports
 import {
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  TagRightIcon,
-  TagCloseButton,
-  HStack,
-  configAuthWrapper
-} from "@chakra-ui/react"
-
-import {
+  Button,
   FormControl,
   FormLabel,
-  FormErrorMessage,
   Input,
   InputGroup,
-  show,
   InputRightElement,
-  handleClick,
   FormHelperText,
-} from "@chakra-ui/react"
+  Heading,
+  Text,
+  VStack,
+  HStack,
+  Box,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { FaGoogle } from 'react-icons/fa';
 
-import AuthWrapper from "./../AuthWrapper";
-import FormInput from "./../forms/FormInput";
-// import Button from "./../forms/Button";
+// This is a simple wrapper component to handle the page layout,
+// replicating what your imported AuthWrapper likely does.
+const AuthWrapper = ({ headline, children }) => {
+  const bgColor = useColorModeValue('gray.50', 'gray.800');
+  const cardBg = useColorModeValue('white', 'gray.700');
+  const textColor = useColorModeValue('gray.700', 'gray.200');
 
+  return (
+    <Box
+      minH="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      bg={bgColor}
+      p={4}
+    >
+      <Box
+        bg={cardBg}
+        p={8}
+        rounded="2xl"
+        shadow="xl"
+        borderWidth="1px"
+        borderColor={useColorModeValue('gray.100', 'gray.600')}
+        w="full"
+        maxW="md"
+      >
+        <VStack spacing={4} align="stretch" textAlign="center" mb={6}>
+          <Heading as="h1" size="xl" color="blue.600">
+            {headline}
+          </Heading>
+          <Text color={textColor}>
+            Sign in to your account to continue
+          </Text>
+        </VStack>
+        {children}
+      </Box>
+    </Box>
+  );
+};
+
+// Map the user state from Redux to component props
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const SignIn = (props) => {
+const SignIn = () => {
+  // Hooks for state and dispatching actions
   const dispatch = useDispatch();
   const history = useHistory();
   const { currentUser } = useSelector(mapState);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
+  // Local state for form inputs and password visibility
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Hook to handle redirection after a successful sign-in
   useEffect(() => {
     if (currentUser) {
       resetForm();
-      history.push("/");
+      history.push('/');
     }
-  }, [currentUser]);
+  }, [currentUser, history]);
 
+  // Function to clear form inputs
   const resetForm = () => {
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   };
 
+  // Function to handle email/password form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(emailSignInStart({ email, password }));
   };
 
+  // Function to handle Google Sign-In
   const handleGoogleSignIn = () => {
     dispatch(googleSignInStart());
   };
 
   const configAuthWrapper = {
-    headline: "LogIn",
+    headline: 'Welcome Back',
   };
 
 
   return (
     <AuthWrapper {...configAuthWrapper}>
-      <div className="loginContainer">
-        <form onSubmit={handleSubmit}>
-          {/* <FormInput
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Email"
-            handleChange={(e) => setEmail(e.target.value)}
-          /> */}
-          <FormControl id="email">
+      <form onSubmit={handleSubmit}>
+        <VStack spacing={6} align="stretch">
+          {/* Email Input Field */}
+          <FormControl id="email" isRequired>
             <FormLabel>Email address</FormLabel>
-            <Input type="email" />
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              borderColor="gray.300"
+              focusBorderColor="blue.500"
+            />
             <FormHelperText>We'll never share your email.</FormHelperText>
           </FormControl>
 
-          {/* <FormInput
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Password"
-            handleChange={(e) => setPassword(e.target.value)}
-          /> */}
+          {/* Password Input Field with Show/Hide button */}
+          <FormControl id="password" isRequired>
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                borderColor="gray.300"
+                focusBorderColor="blue.500"
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            {/* Forgot Password Link */}
+            <FormHelperText>
+              <Link to="/passwordReset">
+                <Text color="blue.500" fontWeight="medium">Forgot password?</Text>
+              </Link>
+            </FormHelperText>
+          </FormControl>
 
-          <InputGroup size="md">
-            <Input
-              pr="4.5rem"
-              type={show ? "text" : "password"}
-              placeholder="Enter password"
-            />
-            <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick}>
-                {show ? "Hide" : "Show"}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
+          {/* Sign In Button */}
+          <Button
+            type="submit"
+            colorScheme="blue"
+            size="lg"
+            rounded="lg"
+            width="full"
+            mt={4}
+          >
+            Sign In
+          </Button>
 
+          {/* Social Sign-in Button */}
+          <Button
+            leftIcon={<FaGoogle />}
+            colorScheme="gray"
+            size="lg"
+            rounded="lg"
+            width="full"
+            onClick={handleGoogleSignIn}
+          >
+            Sign in with Google
+          </Button>
 
-          <Button colorScheme="teal">Sign in</Button>
-
-          <div className="socialSignin">
-            <div className="row">
-              <Button colorScheme="gray" onClick={handleGoogleSignIn}>
-                Sign in with Google{" "}
-              </Button>{" "}
-          
-            </div>{" "}
-          </div>
-
-          <div className="links">
-            <Link to="/signup">Register </Link> {` | `}{" "}
-            <Link to="/passwordReset">Reset Password </Link>{" "}
-          </div>
-        </form>{" "}
-      </div>{" "}
+          {/* Register Link */}
+          <HStack spacing={1} justify="center" mt={4}>
+            <Text>Don't have an account?</Text>
+            <Link to="/signup">
+              <Text color="blue.500" fontWeight="bold">Register</Text>
+            </Link>
+          </HStack>
+        </VStack>
+      </form>
     </AuthWrapper>
   );
 };
 
 export default SignIn;
+

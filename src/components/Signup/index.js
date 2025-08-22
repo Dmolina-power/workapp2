@@ -1,32 +1,89 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
-import { signUpUserStart } from "../../redux/User/user.actions";
-import AuthWrapper from "./../AuthWrapper";
-import FormInput from "./../forms/FormInput";
-import Button from "./../forms/Button";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+import { signUpUserStart } from '../../redux/User/user.actions';
+
+// Chakra UI Component Imports
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Heading,
+  Text,
+  VStack,
+  HStack,
+  Box,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { FaGoogle } from 'react-icons/fa';
+
+// This is a simple wrapper component to handle the page layout,
+// replicating what your imported AuthWrapper likely does.
+const AuthWrapper = ({ headline, children }) => {
+  const bgColor = useColorModeValue('gray.50', 'gray.800');
+  const cardBg = useColorModeValue('white', 'gray.700');
+  const textColor = useColorModeValue('gray.700', 'gray.200');
+
+  return (
+    <Box
+      minH="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      bg={bgColor}
+      p={4}
+    >
+      <Box
+        bg={cardBg}
+        p={8}
+        rounded="2xl"
+        shadow="xl"
+        borderWidth="1px"
+        borderColor={useColorModeValue('gray.100', 'gray.600')}
+        w="full"
+        maxW="md"
+      >
+        <VStack spacing={4} align="stretch" textAlign="center" mb={6}>
+          <Heading as="h1" size="xl" color="blue.600">
+            {headline}
+          </Heading>
+          <Text color={textColor}>
+            Create your account to get started
+          </Text>
+        </VStack>
+        {children}
+      </Box>
+    </Box>
+  );
+};
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
   userErr: user.userErr,
 });
 
-const Signup = (props) => {
+const Signup = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { currentUser, userErr } = useSelector(mapState);
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
       reset();
-      history.push("/");
+      history.push('/');
     }
-  }, [currentUser]);
+  }, [currentUser, history]);
 
   useEffect(() => {
     if (Array.isArray(userErr) && userErr.length > 0) {
@@ -35,10 +92,10 @@ const Signup = (props) => {
   }, [userErr]);
 
   const reset = () => {
-    setDisplayName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    setDisplayName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
     setErrors([]);
   };
 
@@ -53,53 +110,94 @@ const Signup = (props) => {
       })
     );
   };
+  
   const configAuthWrapper = {
-    headline: "Registration",
+    headline: 'Create Account',
   };
 
   return (
     <AuthWrapper {...configAuthWrapper}>
       <form onSubmit={handleFormSubmit}>
-        <FormInput
-          type="text"
-          name="displayName"
-          value={displayName}
-          placeholder="Full name"
-          handleChange={(e) => setDisplayName(e.target.value)}
-        />
+        <VStack spacing={6} align="stretch">
+          {errors.length > 0 && (
+            <Box color="red.500" p={2} rounded="md" borderWidth="1px" borderColor="red.200">
+              {errors.map((err, index) => (
+                <Text key={index}>{err}</Text>
+              ))}
+            </Box>
+          )}
 
-        <FormInput
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Email"
-          handleChange={(e) => setEmail(e.target.value)}
-        />
+          <FormControl id="displayName" isRequired>
+            <FormLabel>Full Name</FormLabel>
+            <Input
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              placeholder="John Doe"
+              borderColor="gray.300"
+              focusBorderColor="blue.500"
+            />
+          </FormControl>
 
-        <FormInput
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Password"
-          handleChange={(e) => setPassword(e.target.value)}
-        />
+          <FormControl id="email" isRequired>
+            <FormLabel>Email Address</FormLabel>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              borderColor="gray.300"
+              focusBorderColor="blue.500"
+            />
+          </FormControl>
 
-        <FormInput
-          type="password"
-          name="confirmPassword"
-          value={confirmPassword}
-          placeholder="Confirm Password"
-          handleChange={(e) => setConfirmPassword(e.target.value)}
-        />
+          <FormControl id="password" isRequired>
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                borderColor="gray.300"
+                focusBorderColor="blue.500"
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
 
-        <Button type="submit">Register</Button>
+          <FormControl id="confirmPassword" isRequired>
+            <FormLabel>Confirm Password</FormLabel>
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="••••••••"
+              borderColor="gray.300"
+              focusBorderColor="blue.500"
+            />
+          </FormControl>
+
+          <Button type="submit" colorScheme="blue" size="lg" rounded="lg" width="full" mt={4}>
+            Register
+          </Button>
+        </VStack>
       </form>
 
-      <div className="links">
-        <Link to="/singin">LogIn</Link>
-        {` | `}
-        <Link to="/passwordReset">Reset Password</Link>
-      </div>
+      <HStack spacing={1} justify="center" mt={6}>
+        <Text>Already have an account?</Text>
+        <Link to="/signin">
+          <Text color="blue.500" fontWeight="bold">Log In</Text>
+        </Link>
+      </HStack>
     </AuthWrapper>
   );
 };

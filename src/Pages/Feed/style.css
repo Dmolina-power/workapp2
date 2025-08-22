@@ -1,0 +1,71 @@
+/* Body and Layout */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc; /* Lighter white/off-white background */
+    color: #334155; /* Default text color */
+  }
+  
+  /* Main Content Area */
+  .feed-container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 5rem; /* Space for a fixed top navbar */
+    
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: #f8fafc;
+  }
+  
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 10;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 16rem; /* Tailwind's w-64 */
+    background-color: #0369a1; /* A solid, calm blue */
+    color: #e2e8f0;
+    padding: 1.5rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Sidebar Navigation Items */
+  .sidebar-nav-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    color: #e2e8f0;
+  }
+  
+  .sidebar-nav-item:hover {
+    background-color: #0c4a6e;
+  }
+  
+  /* Chat Component */
+  .chat-container {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+  }

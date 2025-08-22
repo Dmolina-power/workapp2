@@ -1,0 +1,150 @@
+/* Main chat container and layout */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 1rem; /* Slightly larger radius for a modern feel */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Softer, more modern shadow */
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    min-height: 400px;
+    flex-grow: 1;
+  }
+  
+  /* Scrollable messages area */
+  .chat-messages {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Base message row */
+  .chat-message {
+    display: flex;
+    margin-bottom: 1rem; /* Increased spacing between messages */
+    max-width: 100%;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards; /* Fade-in animation for new messages */
+  }
+  
+  /* Content wrapper to contain avatar and bubble */
+  .message-content {
+    display: flex;
+    align-items: flex-end;
+    max-width: 80%;
+  }
+  
+  .message-bubble {
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    word-wrap: break-word;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .message-bubble:hover {
+    transform: translateY(-2px); /* Subtle hover effect */
+  }
+  
+  /* User avatar styling */
+  .chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Styles for messages from the current user (sent) */
+  .my-message {
+    justify-content: flex-end;
+  }
+  
+  .my-message .message-content {
+    flex-direction: row-reverse;
+  }
+  
+  .my-message .chat-avatar {
+    margin-left: 10px;
+  }
+  
+  .my-message .message-bubble {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-bottom-right-radius: 0.25rem;
+  }
+  
+  /* Styles for messages from other users (received) */
+  .other-message {
+    justify-content: flex-start;
+  }
+  
+  .other-message .message-content {
+    flex-direction: row;
+  }
+  
+  .other-message .chat-avatar {
+    margin-right: 10px;
+  }
+  
+  .other-message .message-bubble {
+    background-color: #f1f5f9;
+    color: #334155;
+    border-bottom-left-radius: 0.25rem;
+  }
+  
+  /* Styles for the chat input form */
+  .chat-input {
+    display: flex;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+  }
+  
+  .chat-input input {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 9999px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  
+  .chat-input input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5); /* Blue glow on focus */
+  }
+  
+  .chat-input button {
+    margin-left: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+  
+  .chat-input button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px); /* Subtle press effect */
+  }
+  
+  /* Keyframe for fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
