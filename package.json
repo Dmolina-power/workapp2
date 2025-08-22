@@ -2,7 +2,7 @@
   "name": "workapp2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Dmolina-power.github.io/workapp2/",
+  "homepage": "https://Dmolina-power.github.io/workapp2/",
   
   "dependencies": {
     "@chakra-ui/react": "^1.6.10",
