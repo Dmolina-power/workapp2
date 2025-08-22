@@ -1,7 +1,7 @@
 {
   "name": "artscape",
   "version": "0.1.0",
-  "homepage": "http://Dmolina-power.github.io/workapp2",
+  "homepage": "https://Dmolina-power.github.io/workapp2/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.6.10",
