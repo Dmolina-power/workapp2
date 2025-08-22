@@ -24,12 +24,6 @@ function sidebar(){
                     Game
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/inbox">
-                    <span data-feather="users"></span>
-                    Messages
-                  </a>
-                </li>
               </ul>
               
             </div>
