@@ -1,0 +1,22 @@
+.rounded-circle{
+    height: 100px;
+    width: 100px;
+    margin-top: 25px;
+}
+
+.studioheading{
+    background-image: url(https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=653&q=80);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.artistname{
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.artistinfo{
+    font-weight: bold;
+}

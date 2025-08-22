@@ -1,0 +1,37 @@
+.rounded-circle{
+    height: 100px;
+    width: 100px;
+    margin-top: 25px;
+}
+
+.jumbotronheader{
+    background-image: url(https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=653&q=80);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotronheader {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+    background-color: #fff;
+  }
+  @media (min-width: 768px) {
+    .jumbotronheader {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+  
+  .jumbotronheader p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .jumbotronheader h1 {
+    font-weight: 300;
+  }
+  
+  .jumbotronheader .container {
+    max-width: 40rem;
+  }
