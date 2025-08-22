@@ -1,8 +1,9 @@
 {
   "name": "artscape",
   "version": "0.1.0",
-  "homepage": "http://Dmolina-power.github.io/workapp2/",
   "private": true,
+  "homepage": "http://Dmolina-power.github.io/workapp2/",
+  
   "dependencies": {
     "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^11.5.0",
