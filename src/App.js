@@ -15,7 +15,7 @@ import Notes from "./Pages/Notes";
 import Sales from "./Pages/Sales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUp";
+
 
 
 const App = (props) => {
@@ -29,7 +29,6 @@ const App = (props) => {
       <Switch>
         <Route path="/signin" render={() => <Login />} />
         <Route path="/passwordReset" render={() => <PasswordReset />} />
-        <Route path="/signup" render={() => <SignUp/>} />
         <Route exact path="/" render={() => (
         
           <Home/>
