@@ -1,75 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { signOutUserStart } from "../../redux/User/user.actions";
-import "./style.css";
+import React from 'react';
+import { Box, Flex, HStack, Text, Button, Link } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOutUserStart } from '../../redux/User/user.actions';
 
 const mapState = (state) => ({
-  currentUser: state.user.currentUser,
-  
+    currentUser: state.user.currentUser,
 });
 
-const Navbar = (props) => {
-  const location = useLocation();
-  const [activeMenu, setActiveMenu] = useState(false);
-  const dispatch = useDispatch();
-  const { currentUser} = useSelector(mapState);
+const ChakraNavbar = () => {
+    const dispatch = useDispatch();
+    const { currentUser } = useSelector(mapState);
 
-  const signOut = () => {
-    dispatch(signOutUserStart());
-  };
+    const signOut = () => {
+        dispatch(signOutUserStart());
+    };
 
-  useEffect(() => {
-    setActiveMenu(false);
-  }, [location]);
-
-  return (
-    <>
-      <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/">
-          NoName{" "}
-        </a>{" "}
-        <button
-          class="navbar-toggler position-absolute d-md-none collapsed"
-          type="button"
-          data-toggle="collapse"
-          data-target="#sidebarMenu"
-          aria-controls="sidebarMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"> </span>{" "}
-        </button>{" "}
-        {currentUser && (
-          <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-              <a class="nav-link" to="/signin" onClick={() => signOut()}>
-                Sign out{" "}
-              </a>{" "}
-            </li>{" "}
-            <li class="nav-item text-nowrap">
-              <Link to="/feed">
-                feed{" "}
-              </Link>{" "}
-            </li>{" "}
-          </ul>
-        )}
-        {!currentUser && [
-          <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-              <Link to="/signin">
-                Login <i class="fas fa-user-circle"> </i>{" "}
-              </Link>{" "}
-            </li>{" "}
-          </ul>,
-        ]}{" "}
-      </nav>{" "}
-    </>
-  );
+    return (
+        <Box bg="gray.800" color="white" px={4} py={2} position="fixed" top="0" width="full" zIndex="1000">
+            <Flex h={16} alignItems="center" justifyContent="space-between">
+                <Box>
+                    <Link as={RouterLink} to="/" fontSize="xl" fontWeight="bold">NoName</Link>
+                </Box>
+                
+                {currentUser ? (
+                    <HStack spacing={8} alignItems="center">
+                        <Link as={RouterLink} to="/feed">
+                            <Text>Feed</Text>
+                        </Link>
+                        <Button colorScheme="teal" onClick={signOut}>Sign out</Button>
+                    </HStack>
+                ) : (
+                    <HStack spacing={8} alignItems="center">
+                        <Link as={RouterLink} to="/signin">
+                            <Text>Login</Text>
+                        </Link>
+                    </HStack>
+                )}
+            </Flex>
+        </Box>
+    );
 };
 
-Navbar.defaultProps = {
-  currentUser: null,
-};
-
-export default Navbar;
+export default ChakraNavbar;

@@ -64,25 +64,25 @@ const SignIn = ({ onClose }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   
-  // State to control the modal's visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // This assumes the modal should open on the sign-in page if no one is logged in
+    if (currentUser) {
+      // 1. Check for onClose before calling it
+      if (onClose) {
+        onClose();
+      }
+      // 2. Redirect to the homepage after successful login
+      history.push('/');
+    }
+  }, [currentUser, history, onClose]);
+
+  useEffect(() => {
+    // This hook is for opening the modal on a dedicated sign-in page, if you're not using a modal on the home page.
     if (!currentUser) {
       setIsModalOpen(true);
     }
   }, [currentUser]);
-
-  // This function is for a hypothetical close button on the sign-in page, if you add one
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const signInPageClasses = classNames({
-    'sign-in-page-wrapper': true,
-    'blur-effect': isModalOpen,
-  });
 
   const resetForm = () => {
     setEmail('');
@@ -95,8 +95,17 @@ const SignIn = ({ onClose }) => {
   };
 
   const handleGoogleSignIn = () => {
-    dispatch(googleSignInStart({ onClose }));
+    dispatch(googleSignInStart());
   };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const signInPageClasses = classNames({
+    'sign-in-page-wrapper': true,
+    'blur-effect': isModalOpen,
+  });
 
   return (
     <div

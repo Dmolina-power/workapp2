@@ -115,19 +115,13 @@ export function* onResetPasswordStart() {
 }
 
 
-// Corrected saga for Google Sign-In
-export function* googleSignIn({ payload }) {
+export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshotFromUserAuth(user);
-    
-    // Check if the payload contains the onClose function and call it
-    if (payload && payload.onClose) {
-      yield call(payload.onClose);
-    }
-
+    // After a successful login, the user state will be updated in Redux.
   } catch (err) {
-    // console.log(err);
+    // Handle error
   }
 }
 
