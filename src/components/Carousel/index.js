@@ -17,7 +17,7 @@ function carousel() {
             <div class="carousel-caption text-left">
               <h1>Welcome to NONAME</h1>
               <p>
-                NCL MAP GAME
+                
               </p>
             </div>
           </div>
@@ -28,7 +28,7 @@ function carousel() {
             <div class="carousel-caption">
               <h1>HOW TO PLAY</h1>
               <p>
-                find where your at
+                
               </p>
             </div>
           </div>
@@ -37,9 +37,9 @@ function carousel() {
           <img src="https://images.unsplash.com/photo-1545518514-ce8448f542b3?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjN8fGFydCUyMHNob3d8ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60"/>
           <div class="container">
             <div class="carousel-caption text-right">
-              <h1>over 500 ports of call</h1>
+              <h1></h1>
               <p>
-               can you find them all
+               
               </p>
             </div>
           </div>
