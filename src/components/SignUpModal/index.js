@@ -1,18 +1,32 @@
 import React from 'react';
 import './style.css';
-import Signup from '../../components/SignIn/'; // Import the existing Signup component
+import SignIn from '../../components/SignIn/';
+import classNames from 'classnames'; 
+
+
 
 const SignUpModal = ({ onClose }) => {
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          &times;
-        </button>
-        <Signup />
+    const modalClass = classNames({
+      'modal-overlay': true,
+      'is-open': true,
+    });
+  
+    return (
+      <div className={modalClass} onClick={onClose}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          {/* Delete this entire line to remove the close button */}
+          {/* <button className="modal-close" onClick={onClose}>
+            &times;
+          </button> */}
+          <SignIn onClose={onClose} />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+  
 
 export default SignUpModal;
+
+
+
+

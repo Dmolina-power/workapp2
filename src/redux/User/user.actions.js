@@ -46,6 +46,7 @@ export const resetUserState = () => ({
   type: userTypes.RESET_USER_STATE
 });
 
-export const googleSignInStart = () => ({
-  type: userTypes.GOOGLE_SIGN_IN_START
+export const googleSignInStart = (payload) => ({
+  type: 'GOOGLE_SIGN_IN_START',
+  payload: payload
 });

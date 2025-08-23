@@ -1,4 +1,4 @@
-import { takeLatest, call, all, put } from 'redux-saga/effects';
+import { takeLatest, call, all, put, select } from 'redux-saga/effects';
 import { auth, handleUserProfile, getCurrentUser, googleProvider } from './../../Firebase/Utils';
 import userTypes from './user.types';
 import { signInSuccess, signOutUserSuccess, resetPasswordSuccess, userError } from './user.actions';
@@ -114,10 +114,17 @@ export function* onResetPasswordStart() {
   yield takeLatest(userTypes.RESET_PASSWORD_START, resetPassword);
 }
 
-export function* googleSignIn() {
+
+// Corrected saga for Google Sign-In
+export function* googleSignIn({ payload }) {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshotFromUserAuth(user);
+    
+    // Check if the payload contains the onClose function and call it
+    if (payload && payload.onClose) {
+      yield call(payload.onClose);
+    }
 
   } catch (err) {
     // console.log(err);
