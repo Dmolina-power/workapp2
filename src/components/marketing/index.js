@@ -5,33 +5,7 @@ function marketing() {
   return (
     <div class="container marketing">
       <div class="row">
-        <div class="col-lg-6">
-          <img
-            class="bd-placeholder-img rounded-circle"
-            width="140"
-            height="140"
-            src="https://images.unsplash.com/photo-1500628550463-c8881a54d4d4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YXJ0aXN0fGVufDB8fDB8&auto=format&fit=crop&w=500&q=60"
-          />
-
-          <h2>Rules</h2>
-          <p>
-           
-          </p>
-        </div>
-
-        <div class="col-lg-6">
-          <img
-            class="bd-placeholder-img rounded-circle"
-            width="140"
-            height="140"
-            src="https://images.unsplash.com/photo-1544663808-12f0dd383df7?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8OTl8fGFydCUyMGNvbGxlY3RvcnxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=500&q=60"
-          />
-
-          <h2>lets play</h2>
-          <p>
-           
-          </p>
-        </div>
+        
       </div>
 
       <hr class="featurette-divider"></hr>

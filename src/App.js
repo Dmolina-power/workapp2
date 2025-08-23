@@ -9,8 +9,10 @@ import PasswordReset from "./components/PasswordReset";
 
 
 //Pages
-import Studio from "./Pages/game";
+import Games from "./Pages/game";
 import Feed from "./Pages/Feed";
+import Notes from "./Pages/Notes";
+import Sales from "./Pages/Sales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
@@ -32,8 +34,11 @@ const App = (props) => {
         
           <Home/>
           )} />
-        <Route path="/game" render={() => <Studio />} />
+        <Route path="/games" render={() => <Games></Games>} />
         <Route path="/feed" render={() => <Feed></Feed>} />
+        <Route path="/notes" render={() => <Notes></Notes>} />
+        <Route path="/games" render={() => <Games></Games>} />
+        <Route path="/sales" render={() =>  <Sales></Sales>} />
       </Switch>
     </>
   );

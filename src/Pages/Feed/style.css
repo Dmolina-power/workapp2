@@ -1,15 +1,15 @@
 /* Body and Layout */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f8fafc; /* Lighter white/off-white background */
-    color: #334155; /* Default text color */
+    background-color: #f8fafc; 
+    color: #334155; 
   }
   
   /* Main Content Area */
   .feed-container {
     display: flex;
     min-height: 100vh;
-    padding-top: 5rem; /* Space for a fixed top navbar */
+    padding-top: 5rem; 
     
   }
   
@@ -33,29 +33,6 @@ body {
     align-items: center;
     padding: 0 2rem;
     z-index: 10;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    width: 16rem; /* Tailwind's w-64 */
-    background-color: #0369a1; /* A solid, calm blue */
-    color: #e2e8f0;
-    padding: 1.5rem;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Sidebar Navigation Items */
-  .sidebar-nav-item {
-    display: block;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    color: #e2e8f0;
-  }
-  
-  .sidebar-nav-item:hover {
-    background-color: #0c4a6e;
   }
   
   /* Chat Component */

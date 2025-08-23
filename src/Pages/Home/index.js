@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Carousel from "../../components/Carousel/index";
 import Marketing from "../../components/marketing";
 import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar/Navbar";
-import AuthModal from "../../components/AuthModal/"; // Import the new modal component
-import SignIn from "../../components/SignIn"; // Import the SignIn component
-import Signup from "../../components/Signup"; // Import the Signup component
+import Navbar from "../../components/Navbar";
+import AuthModal from "../../components/AuthModal/"; 
+import SignIn from "../../components/SignIn"; 
+import Signup from "../../components/Signup"; 
 import "./style.css";
 
 // Map the Redux user state to a prop
@@ -49,7 +48,7 @@ const Home = (props) => {
     <>
       <div className="home-content-wrapper">
         <Navbar {...props} />
-        <Carousel />
+
         <Marketing />
         <Footer />
       </div>

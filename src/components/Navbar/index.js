@@ -26,7 +26,14 @@ const ChakraNavbar = () => {
                 {currentUser ? (
                     <HStack spacing={8} alignItems="center">
                         <Link as={RouterLink} to="/feed">
-                            <Text>Feed</Text>
+                            <Text>CHAT</Text>
+                        </Link>
+                        <Link as={RouterLink} to="/sales">
+                            <Text>Sales HUB</Text>
+                        </Link><Link as={RouterLink} to="/games">
+                            <Text>GAMES</Text>
+                        </Link><Link as={RouterLink} to="/notes">
+                            <Text>NOTES</Text>
                         </Link>
                         <Button colorScheme="teal" onClick={signOut}>Sign out</Button>
                     </HStack>
