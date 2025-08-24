@@ -15,7 +15,7 @@ import Notes from "./Pages/Notes";
 import Sales from "./Pages/Sales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-
+import Registration from "./Pages/registration";
 
 
 const App = (props) => {
@@ -28,9 +28,10 @@ const App = (props) => {
     <>
       <Switch>
         <Route path="/signin" render={() => <Login />} />
-        <Route path="/passwordReset" render={() => <PasswordReset />} />
+        <Route path="/passwordReset" render={() => <PasswordReset />} />  
+         <Route path="/registration" render={() => <Registration></Registration>} />
         <Route exact path="/" render={() => (
-        
+     
           <Home/>
           )} />
         <Route path="/games" render={() => <Games></Games>} />
@@ -38,6 +39,7 @@ const App = (props) => {
         <Route path="/notes" render={() => <Notes></Notes>} />
         <Route path="/games" render={() => <Games></Games>} />
         <Route path="/sales" render={() =>  <Sales></Sales>} />
+        
       </Switch>
     </>
   );

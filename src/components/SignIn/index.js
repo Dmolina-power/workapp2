@@ -185,7 +185,7 @@ const SignIn = ({ onClose }) => {
             </Button>
             <HStack spacing={1} justify="center" mt={4}>
               <Text>Don't have an account?</Text>
-              <Link to="/signup">
+              <Link to="/registration">
                 <Text color="blue.500" fontWeight="bold">Register</Text>
               </Link>
             </HStack>
